@@ -1,0 +1,27 @@
+# nucleon spin independent cross section in pb
+SIGSI        2e-6
+# nucleon spin dependent cross section in pb
+SIGSD        0
+# theta angle in rad (from 0 to  pi), tan(theta) = an/ap
+THETA        0
+# Wimp mass in GeV
+MW           60
+# RESOLUTIONK  1.0
+# resolution proportional constant. Sigma = k * sqrt (E)
+# below 50 keV -> 0.2 keV cte
+RESOLUTION  1
+# Number of elements in the target. For every element, 
+# number of atoms in the molecule and file containing element data.
+# consider 0.92 i.a. for 7Li and 0.08 for 6Li. 6 Li has J=1, but 
+# we do not consider by now
+# 2*0.92 = 1.84, 0.16
+# HELM form factor is not valid for A<= 6!!!
+# for SI take Li average, with A=6.94
+NELEMENTS    3
+2 Li.dat
+1 Mo100.dat
+4 O.dat
+# Number of halo models. For every model, 
+# model type (see DMVHaloModel.hh) and file containing model data.
+NHALOMODELS  1
+ISO iso.dat

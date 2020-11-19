@@ -1,0 +1,12 @@
+# El factor de forma SI no vale para A=6!! usar solo para SD
+A     6
+Z     3
+J     1
+
+
+
+# Quenching factor
+Q     1
+
+FFSI  STD
+FFSD  STD

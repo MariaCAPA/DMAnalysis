@@ -1,0 +1,6 @@
+# Halo density in GeV/cm^3
+RHO   0.3
+# V0 velocity in km/s
+V0    220.
+# Escape velocity in km/s
+VESC  544.

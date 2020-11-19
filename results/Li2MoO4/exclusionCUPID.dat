@@ -1,0 +1,15 @@
+# file to initialize Rate class
+RATEFILE rateCUPID.dat
+# Exposure in kg * day
+EXPOSURE 2500
+#Confidence level
+CL 90
+# If linear background, number of counts/keV/kg/day
+LINBACKGROUND 1
+# Initial Energy 
+EINI  0
+# Final Energy
+EEND 50
+# Energy bin
+EBIN 0.1
+# con eend 20 sale mejor que con 50 y cuadra mas que con el del articulo

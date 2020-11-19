@@ -1,0 +1,21 @@
+A     7
+Z     3
+J     1.5
+
+
+#ISPSM, Ellis–Flores [28, 39] 1/2 0 3.793
+Sp 0.5
+Sn 0
+#OGM, Engel–Vogel [29] 0.38 0 (3.256)exp
+Sp 0.38
+Sn 0
+
+#SM, Pacheco-Strottman [14] 0.497 0.004
+Sp 0.497
+Sn 0.004
+
+# Quenching factor
+Q     1
+
+FFSI  STD
+FFSD  STD
