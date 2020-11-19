@@ -1,0 +1,12 @@
+A     16.
+Z     8
+#only one isotope, 16, no J
+#J    
+#Sp   
+#Sn  
+
+# quenching factor
+Q     1
+
+FFSI  STD
+FFSD  STD
