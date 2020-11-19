@@ -1,0 +1,16 @@
+A     127.
+Z     53
+J     5./2.
+
+# Bonna
+Sp    0.309
+Sn    0.075
+# Nime
+Sp    0.354
+Sn    0.064
+
+# Quenching factor: From 0.11 to 0.07
+Q     0.09 
+
+FFSI  STD
+FFSD  STD

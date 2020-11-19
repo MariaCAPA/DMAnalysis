@@ -1,0 +1,11 @@
+A     183.84
+Z     74
+#J     5./2.
+#Sp    0.2477 
+#Sn    0.0198
+
+# quenching factor
+Q     1
+
+FFSI  STD
+FFSD  STD

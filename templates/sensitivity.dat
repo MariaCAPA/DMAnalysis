@@ -1,0 +1,15 @@
+# file to initialize Rate class
+RATEFILE $DMANALYSIS/templates/rate.dat
+# Exposure in kg . day 10 crystals, 10.7 kg each, 1 year
+EXPOSURE 390550
+#Confidence level
+# 90% experiments with 90% CL
+DELTA2 12.8
+# file with background, number of counts/keV/kg/day
+LINBACKGROUND 1
+# Initial Energy
+EINI 2
+# Final Energy
+EEND 8
+# Energy bin
+EBIN 1

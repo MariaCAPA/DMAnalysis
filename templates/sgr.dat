@@ -1,0 +1,12 @@
+# Halo density in GeV/cm^3 (Max: 20% 0.3, Min: 4% 0.3)
+RHO   0.06
+# V0 velocity in km/s
+V0    220.
+# Escape velocity in km/s
+VESC  650.
+# Flux Velocity in galactic coordinates in km/s
+# Law et al. spherical
+VFLUX -86 69 -384
+
+#Dispersion velocity in km/s
+VDIS 20

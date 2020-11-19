@@ -1,0 +1,26 @@
+A     26.98
+Z     13
+J     2.5
+#Sp    0.2477 
+#Sn    0.0198
+#ISPSM, Ellis–Flores [28, 39] 1/2 0 4.793
+Sp 0.5
+Sn 0
+#OGM, Engel–Vogel [29] 0.25 0 (3.642)exp
+Sp 0.25 
+Sn 0
+#EOGM (gA/gV = 1), Engel–Vogel [29] 0.333 0.043 (3.642)exp
+Sp 0.333
+Sn 0.043
+#EOGM (gA/gV = 1.25), Engel–Vogel [29] 0.304 0.072 (3.642)exp
+Sp 0.304
+Sn 0.072
+#SM, Engel et al. [7] 0.3430 0.0296 3.584
+Sp 0.343
+Sn 0.0296
+
+# quenching factor
+Q     1
+
+FFSI  STD
+FFSD  STD
