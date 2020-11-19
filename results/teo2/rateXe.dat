@@ -1,0 +1,18 @@
+# nucleon spin independent cross section in pb
+SIGSI        1e-5
+# nucleon spin dependent cross section in pb
+SIGSD        0
+# theta angle in rad (from 0 to  pi), tan(theta) = an/ap
+THETA        0
+# Wimp mass in GeV
+MW           50
+# resolution proportional constant. Sigma = k * sqrt (E)
+RESOLUTIONK  0.45
+# Number of elements in the target. For every element, 
+# number of atoms in the molecule and file containing element data.
+NELEMENTS    1
+1 $DMANALYSIS/templates/Xe.dat
+# Number of halo models. For every model, 
+# model type (see DMVHaloModel.hh) and file containing model data.
+NHALOMODELS  1
+ISO $DMANALYSIS/templates/iso.dat
