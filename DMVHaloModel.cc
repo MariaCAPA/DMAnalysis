@@ -6,8 +6,9 @@
 #include <iostream>
 #include "DMVHaloModel.hh"
 #include "DMPhysConstants.hh"
-#include <gsl/gsl_sf.h>
-#include <gsl/gsl_math.h>
+//#include <gsl/gsl_sf.h>
+//#include <gsl/gsl_math.h>
+#include <TMath.h>
 
 using namespace std;
 
@@ -72,13 +73,16 @@ void DMVHaloModel::SetV0(double v0)
 double DMVHaloModel::Chi (double x, double y, double z)
 {
   double expz2 = exp(-z*z);
-  double cte = 1./(gsl_sf_erf(z) - 2./SQRTPI*z*expz2);
+  //double cte = 1./(gsl_sf_erf(z) - 2./SQRTPI*z*expz2);
+  double cte = 1./(TMath::Erf(z) - 2./SQRTPI*z*expz2);
   double aux = 0.;
   
   if (x>=0. && x<= z-y) 
-    aux = gsl_sf_erf(x+y) - gsl_sf_erf(x-y) - 4./SQRTPI*y*expz2;
+    aux = TMath::Erf(x+y) - TMath::Erf(x-y) - 4./SQRTPI*y*expz2;
+    //aux = gsl_sf_erf(x+y) - gsl_sf_erf(x-y) - 4./SQRTPI*y*expz2;
   else if (x>z-y && x<= z+y) 
-    aux = gsl_sf_erf(z) - gsl_sf_erf(x-y) - 2./SQRTPI*(z+y-x)*expz2;
+    aux = TMath::Erf(z) - TMath::Erf(x-y) - 2./SQRTPI*(z+y-x)*expz2;
+    //aux = gsl_sf_erf(z) - gsl_sf_erf(x-y) - 2./SQRTPI*(z+y-x)*expz2;
 
   return cte*aux/2./y;
 }

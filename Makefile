@@ -12,7 +12,7 @@ CCFLAGS = -g `root-config --glibs --cflags --libs` -fPIC -lCore
 INCLUDES=-I. ${ROOTINC}
 
 #LIBDIR= -L 
-LDLIBS= -lgsl -lgslcblas 
+#LDLIBS= -lgsl -lgslcblas 
 #LDLIBS= -lgsl -lgslcblas -lRooFit -lRooFitCore 
 
 OBJDIR=obj
