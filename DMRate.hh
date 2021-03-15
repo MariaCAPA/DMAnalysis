@@ -39,9 +39,13 @@ class DMRate
                     // MW is set
 
   // Detector resolution
-  // if (ResolutinK>0) sigma = ResolutionK*sqrt(Energy)
-  // else , sigma = -ResolutionK (cte in all the range)
+  // if (Resolution>0)  sigma = Resolution (cte in all the range)
+  // else if (ResolutinK>0) sigma = ResolutionK*sqrt(Energy)
+  // else sigma = sqrt(ResolutionA * ene + ResolutionB);
+  double Resolution; 
   double ResolutionK; 
+  double ResolutionA; 
+  double ResolutionB; 
   
   public:
 
@@ -60,7 +64,10 @@ class DMRate
   inline double GetTheta () {return Theta;};
   inline double GetMW () {return MW;};
   inline double GetMWnucleon2 () {return MWnucleon2;};
+  inline double GetResolution () {return Resolution;}; 
   inline double GetResolutionK () {return ResolutionK;}; 
+  inline double GetResolutionA () {return ResolutionA;}; 
+  inline double GetResolutionB () {return ResolutionB;}; 
   inline int GetNElements() {return NElements;};
   inline int GetNHaloModels() {return NHaloModels;};
   inline DMVHaloModel * GetHaloModel (int i) {return HaloModels[i];}
@@ -73,7 +80,10 @@ class DMRate
   inline void SetTheta (double aux) {Theta=aux;};
   inline void SetMW (double aux) 
     {MW=aux; MWnucleon2=mNucleon*MW/(mNucleon+MW); MWnucleon2 *= MWnucleon2;};
+  inline void SetResolution (double aux) {Resolution=aux;}; 
   inline void SetResolutionK (double aux) {ResolutionK=aux;}; 
+  inline void SetResolutionA (double aux) {ResolutionA=aux;}; 
+  inline void SetResolutionB (double aux) {ResolutionB=aux;}; 
 
   // Read data from file
   int Initialize(char * fileName); 
@@ -93,6 +103,11 @@ class DMRate
 
   // integrate the spectrum from e1 to e2.  takes into account the resolution
   int SpectrumResolution (double e1, double e2, double ebin,  double * S0, double * Sm, double * phi);  
+
+  
+  // the sigma for energy ene, based on the resolution parameters
+  // 
+  double GetSigma(double ene);
 	 
 }; // End of class DMRate declaration
 

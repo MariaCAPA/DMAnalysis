@@ -19,13 +19,17 @@
 DMRate::DMRate ():
 NElements(0),Elements(0),NHaloModels(0),HaloModels(0)
 {
+  Resolution=0;
+  ResolutionK=0;
+  ResolutionA=0;
+  ResolutionB=0;
 }
 
 
 // Copy constructor
 DMRate::DMRate(const DMRate &other):
 NElements(other.NElements), Mol(other.Mol), NHaloModels(other.NHaloModels), SigSI(other.SigSI), SigSD(other.SigSD),
-Theta(other.Theta), MW(other.MW), MWnucleon2(other.MWnucleon2), ResolutionK(other.ResolutionK) 
+Theta(other.Theta), MW(other.MW), MWnucleon2(other.MWnucleon2), Resolution(other.Resolution), ResolutionK(other.ResolutionK) , ResolutionA(other.ResolutionA), ResolutionB(other.ResolutionB)
 {
   int i=0;
   // Halo models
@@ -107,7 +111,8 @@ int DMRate::Initialize(char * fileName)
     // MARIA 180620. new var in cfg file: resolution  -> cte with energy.
     // Internally, put it negative. It means that it is cte
     else if (!strcmp(dummy,"RESOLUTIONK"))  srLine >> ResolutionK;
-    else if (!strcmp(dummy,"RESOLUTION")) { srLine >> ResolutionK; ResolutionK*=-1;}
+    else if (!strcmp(dummy,"RESOLUTION")) { srLine >> Resolution;}
+    else if (!strcmp(dummy,"RESOLUTIONAB")) { srLine >> ResolutionA >> ResolutionB;}
     else if (!strcmp(dummy,"NELEMENTS"))  
     {
       srLine >> NElements;
@@ -154,6 +159,12 @@ int DMRate::Initialize(char * fileName)
     Elements[i]->SetSpinFactor(Theta);
     Elements[i]->SetTheta(Theta);
   }
+
+  // printf resolution model
+  if (Resolution>0) std::cout << " cte resolution. Sigma = " << Resolution << " keV " << std::endl;
+  else if (ResolutionK>0)  std::cout << " sigma = " << ResolutionK << " * sqrt(ene) (keV) " << std::endl; 
+  else if (ResolutionA>0)  std::cout << " sigma = sqrt( " << ResolutionA << " * ene + " << ResolutionB << " ) (keV) " << std::endl; 
+  else std::cout << " Resolution not taken into account " << std::endl;
   return 0;
 }
 void DMRate::SetParams (double mw, double si, double sd, double theta)
@@ -251,6 +262,14 @@ int DMRate::Rate (double energy_ee, double * S0Tot, double * SMTot, double * Phi
 // Output: Unmodulated and modulated rate and phi
 //         Arrays of dim (e1-e2)/ebin
 
+double DMRate::GetSigma(double ene)
+{
+  if (Resolution>0) return Resolution;
+  if (ResolutionK>0)  return ResolutionK*sqrt(ene); 
+  return sqrt(ResolutionA * ene + ResolutionB);
+
+}
+
 int DMRate::SpectrumResolution (double e1, double e2, double ebin, 
                                 double * S0, double * Sm, double * phi)
 {
@@ -265,7 +284,8 @@ int DMRate::SpectrumResolution (double e1, double e2, double ebin,
 
   //////////////// NO RESOLUTION: NO CONVOLUTION
   ind = 0;
-  if (fabs(ResolutionK)<=PRECISION)
+  //if (fabs(ResolutionK)<=PRECISION)
+  if (Resolution==0 && ResolutionK==0 && ResolutionA==0)
   {
     for (ei=e1; ei < e2; ei+=ebin)
     {
@@ -280,11 +300,13 @@ int DMRate::SpectrumResolution (double e1, double e2, double ebin,
   int nSig = 5; // Number of +-sigma of the convolution interval
 
   // Compute auxiliar array with the rates. From e1-nSig*sigma (or 0.1) to e2+nSig*sigma 
-  double auxsig = (ResolutionK<0 ? -nSig*ResolutionK : nSig*ResolutionK*sqrt(e1)); 
+  //double auxsig = (ResolutionK<0 ? -nSig*ResolutionK : nSig*ResolutionK*sqrt(e1)); 
+  double auxsig = nSig*GetSigma(e1);
   double arrayEi   = (e1-auxsig < minEne ? minEne : e1-auxsig); 
   double arrayEf   = e2;
-  if (ResolutionK<0) arrayEf -= nSig * ResolutionK;
-  else arrayEf += nSig * ResolutionK * sqrt (e2);
+  //if (ResolutionK<0) arrayEf -= nSig * ResolutionK;
+  //else arrayEf += nSig * ResolutionK * sqrt (e2);
+  arrayEf += nSig*GetSigma(e2);
   double arrayEbin = ( arrayEf - arrayEi ) / arrayDim; 
 
   // Auxiliar arrays with the rates (Unmodulated, modulated, phase)
@@ -321,7 +343,8 @@ int DMRate::SpectrumResolution (double e1, double e2, double ebin,
     // Loop edif: integral in the bin ei-ef
     for (edif=ei; edif<=ef; edif+= estep)
     {
-      auxsig = (ResolutionK<0 ? -nSig*ResolutionK : nSig*ResolutionK*sqrt(edif)); 
+      //auxsig = (ResolutionK<0 ? -nSig*ResolutionK : nSig*ResolutionK*sqrt(edif)); 
+      auxsig = nSig*GetSigma(edif);
       en1 = (edif - auxsig < minEne ? minEne : edif - auxsig);
       en2 = edif + auxsig;
       ens = (en2 - en1)/100.;
@@ -345,7 +368,8 @@ int DMRate::SpectrumResolution (double e1, double e2, double ebin,
       // Loop en: Gaussian convolution
       for (en=en1; en<=en2; en+=ens) 
       {
-        auxsig = (ResolutionK<0 ? -ResolutionK : ResolutionK*sqrt(en));
+        //auxsig = (ResolutionK<0 ? -ResolutionK : ResolutionK*sqrt(en));
+        auxsig = GetSigma(en);
         weight = exp (-(edif-en)*(edif-en)/2./auxsig/auxsig) / auxsig;
 
         // Look for the index corresponding to en in the rate array
