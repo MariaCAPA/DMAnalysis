@@ -38,8 +38,11 @@ class DMSensitivityPlotHandle: public DMVPlotHandle
 
   // Get the Spin independent and spin dependent sensitivity curve in a TGraph 
   // Units: MW (GeV) Sigma (pb)
+  TGraph * GetSensitivity(double iniM = 1, double endM=1e3, int ssi=1, int ssd=0, double theta=0);
   TGraph * GetSISensitivity(double iniM = 1, double endM=1e3);
-  TGraph * GetSDSensitivity(double iniM = 1, double endM=1e3);
+  TGraph * GetSDSensitivity(double iniM = 1, double endM=1e3, double theta=0);
+  TGraph * GetSDpSensitivity(double iniM = 1, double endM=1e3);
+  TGraph * GetSDnSensitivity(double iniM = 1, double endM=1e3);
 
   // Get a TTree with all the calculated vars. 
   TTree * GetAllVars(double iniM=1, double endM=1e3);

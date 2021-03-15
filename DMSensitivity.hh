@@ -29,6 +29,7 @@ class DMSensitivity: public DMVSensitivity
   // in picobarns for the given Wimp mass, the experimental 
   // backgrouond and the theoretical spectrum to the given delta2
   virtual int GetMaxCrossSection(double mW, double delta2, double * ssi, double * ssd);
+  virtual double GetMaxCrossSection(double mW, double delta2, int ssi, int ssd, double theta);
 
   private:
   // For the sigma calculus

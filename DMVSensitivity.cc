@@ -80,6 +80,7 @@ int DMVSensitivity::Initialize(char * fileName)
 
   } // end while
   fq.close();
+  SetWindow(EWini,EWend);
  
   // Set experimental spectrum
   if (flag==0) SetBackground(Eini, Eend, Ebin, auxbackground);

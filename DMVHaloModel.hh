@@ -47,7 +47,7 @@ class DMVHaloModel
     // Initialize parameters from file
     virtual int Initialize(char * fileName)=0;
 
-    // Return the Halo model distribution int (f(v)/v^2)
+    // Return the Halo model distribution int (f(v)/v)
     // Output: S0-> mean distrib. Sm-> modulated, phi-> phase of the max(days)
     // It must be defined for every daughter class
     virtual double T (double vmin, double * S0, double * Sm, double * phi )=0;

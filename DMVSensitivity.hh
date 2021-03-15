@@ -27,6 +27,7 @@ class DMVSensitivity
   double EWend;  // Energy end of the energy window to compute 
                  // the exclusion, in keVee
   int Nbins;     // Number of bins = (Eend - Eini)/Ebin
+  int NWbins;     // Number of bins in window= (EWend - EWini)/Ebin
   double * Background; // Array with the background 
                    // in counts/bin/kg/day. Dim Nbins
   double * S0; // Array with the theoretical spectrum S0
@@ -52,6 +53,8 @@ class DMVSensitivity
   double GetEWend() {return EWend;};
   double GetEbin() {return Ebin;};
   int    GetNbins() {return Nbins;};
+  int    GetNWbins() {return NWbins;};
+
   double * GetBackground() {return Background;};
   double * GetS0() {return S0;};
   double * GetSm() {return Sm;};
@@ -60,8 +63,8 @@ class DMVSensitivity
   void SetTheoRate(DMRate * aux) {TheoRate = aux;};
   void SetExposure(double aux)   {Exposure = aux;}; 
   void SetDelta2      (double aux)   {Delta2 = aux;};   
-  void SetEWini    (double aux)  {EWini = (aux<Eini ? Eini : aux);}; 
-  void SetEWend    (double aux)  {EWend = (aux>Eend ? Eend : aux);};
+  void SetEWini    (double aux)  {EWini = (aux<Eini ? Eini : aux);NWbins = (EWend-EWini)/Ebin;}; 
+  void SetEWend    (double aux)  {EWend = (aux>Eend ? Eend : aux);NWbins = (EWend-EWini)/Ebin;};
   void SetBackground  (double * aux) {Background = aux;};
   void SetS0 (double * aux) {S0 = aux;};
   void SetSm (double * aux) {Sm = aux;};
@@ -100,6 +103,8 @@ class DMVSensitivity
   // in picobarns for the given Wimp mass, the experimental 
   // backgrouond and the theoretical spectrum to the given delta2
   virtual int GetMaxCrossSection(double mW, double delta2, double * ssi, double * ssd)=0;
+  virtual double GetMaxCrossSection(double mW, double delta2, int ssi, int ssd, double theta)=0;
+
 
 }; // End of class DMVSensitivity declaration
 
