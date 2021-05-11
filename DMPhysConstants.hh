@@ -42,15 +42,15 @@
 
 // Conversion constants in k m s system
 // (Not used by now)
-#define femto 1E-15
-#define pico  1E-12
-#define nano  1E-9
-#define micro 1E-6
-#define mili  1E-3
-#define kilo  1E3
-#define mega  1E6
-#define giga  1E9
-#define tera  1E12
+//#define femto 1E-15
+//#define pico  1E-12
+//#define nano  1E-9
+//#define micro 1E-6
+//#define mili  1E-3
+//#define kilo  1E3
+//#define mega  1E6
+//#define giga  1E9
+//#define tera  1E12
 #define eV    1.602176E-19
 #define keV    1.602176E-16
 #define MeV    1.602176E-13
