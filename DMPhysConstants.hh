@@ -66,20 +66,21 @@
 //#define DOUBLE   double
 
 // EARTH ORBIT. UNIT VECTORS
-#define earthE1_0 -0.0670
-#define earthE1_1  0.4927
-#define earthE1_2 -0.8676
+// MARIA 022822. Follow [2105.00599]
+#define earthE1_0 -0.0504
+#define earthE1_1  0.4946
+#define earthE1_2 -0.8677
 
-#define earthE2_0 -0.9931
-#define earthE2_1 -0.117
-#define earthE2_2 0.01032
+#define earthE2_0 -0.9941
+#define earthE2_1 -0.1088
+#define earthE2_2 -0.0042
 
 // Phase of the orbit in years
 #define earthT0 0.218 
 
 // SUN PECULIAR VELOCITY (km/s)
-#define sunPeculiar_0 10
-#define sunPeculiar_1 5.25
-#define sunPeculiar_2 7.17
+#define sunPeculiar_0 11.1
+#define sunPeculiar_1 12.2
+#define sunPeculiar_2 7.3
 
 #endif

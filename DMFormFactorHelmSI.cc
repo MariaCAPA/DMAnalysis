@@ -43,6 +43,6 @@ double DMFormFactorHelmSI::F2 (double energy)
    // h_c in MeV * femto
    double aux = BParam*sqrt(q2)/h_c; // adimensional
 
-   double aux2 = 3*SBessel1(aux)/aux*exp(-SSquared*q2/h_c/h_c);
+   double aux2 = 3*SBessel1(aux)/aux*exp(-SSquared*q2/h_c/h_c/2.); // MARIA 022822, factor 2 missing
    return (aux2*aux2);
 }

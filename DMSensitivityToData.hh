@@ -5,6 +5,10 @@
  * experimental spectrum and a theoritical one (class Rate)
  * Calculates the sensitivity following formule 16 of Astrop Phys 14 82001) 339
  * bk is a MEASURED BKG (so bk = bk' + S0)
+ 
+****  Difference with mother class: Now, bk = bk  + S0
+****** This makes the function much more simple (sigma is just a multiplicative factor)
+
  *********************************/
 
 #ifndef __DM__SensitivityToData__hh__
@@ -43,6 +47,7 @@ class DMSensitivityToData: public DMVSensitivity
   // in picobarns for the given Wimp mass, the experimental 
   // backgrouond and the theoretical spectrum to the given delta2
   int GetMaxCrossSection(double mW, double delta2, double * ssi, double * ssd);
+  double GetMaxCrossSection(double mW, double delta2, int ssi, int ssd, double theta);
 
 }; // End of class DMSensitivityToData declaration
 
