@@ -1,5 +1,5 @@
 # LowEnergy
-CUPID low energy analysis
+DMAnalysis
 
 to compile, do make in the main directory
 
