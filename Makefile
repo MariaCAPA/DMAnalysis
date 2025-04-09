@@ -2,7 +2,8 @@ ROOTINC= -I$(shell root-config --incdir)
 
 CC=g++
 LD=g++
-CXXFLAGS= -g -std=c++11 -fPIC 
+CXXFLAGS= -g -std=c++17 -fPIC 
+#CXXFLAGS= -g -std=c++11 -fPIC 
 #CXXFLAGS= -g -fPIC 
 #-std=gnu++11
 # -std=c++11 
