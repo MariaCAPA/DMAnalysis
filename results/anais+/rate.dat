@@ -7,7 +7,7 @@ THETA        0
 # Wimp mass in GeV
 MW           60
 # resolution proportional constant. Sigma = k * sqrt (E)
-RESOLUTIONK  0.4
+RESOLUTIONK  0.1
 
 # RESOLUTIONK  1.0
 # Number of elements in the target. For every element, 

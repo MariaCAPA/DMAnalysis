@@ -87,10 +87,9 @@ gPad->Update();
   //exclusion->SetLinearBkg(bkg); // in c/keVee/kg/d
   DMExclusionPlotHandle  plothl (exclusion);
   std::vector <double> threshold;
-  threshold.push_back(1);
   threshold.push_back(0.25);
-  //threshold.push_back(0.15);
-  //threshold.push_back(0.10);
+  threshold.push_back(0.15);
+  threshold.push_back(0.10);
   threshold.push_back(0.05);
   for (int ii=0; ii<threshold.size(); ii++)
   {

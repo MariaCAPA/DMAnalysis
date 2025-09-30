@@ -1,4 +1,4 @@
-compRate(double si=1e-10, double mass=100)
+void compRate(double si=1e-10, double mass=100)
 {
    gSystem->Load("libDMAnalysis");
 
@@ -90,9 +90,9 @@ hAr->Scale(1000.*365);
 hNaI->Scale(1000.*365);
 hXe->GetYaxis()->SetTitle("c / keV / ton / yr");
 hXe->GetXaxis()->SetTitle("keV_{NR}");
-hXe->Draw("l");
-hAr->Draw("lsame");
-hNaI->Draw("lsame");
+hXe->Draw("lhist");
+hAr->Draw("lhistsame");
+hNaI->Draw("lhistsame");
 
 TLegend * leg = new TLegend(0.75,0.50,0.9,0.9);
 leg->AddEntry(hXe,"Xe ");
@@ -121,8 +121,8 @@ hNaIWinter->SetLineStyle(7);
 
 c = new TCanvas();
 
-hNaISummer->Draw("l");
-hNaIWinter->Draw("lsmae");
+hNaISummer->Draw("lhist");
+hNaIWinter->Draw("lhistsame");
 
 leg = new TLegend(0.75,0.50,0.9,0.9);
 leg->AddEntry(hNaISummer,"Summer ");

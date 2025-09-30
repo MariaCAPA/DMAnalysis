@@ -55,13 +55,13 @@ double Atot=ANa+AI;
     rNa->SetMW(MW[i]);
     rI->SetMW(MW[i]);
 
-    hrate = plothl.GetRate(1000); // NBins between 0 and 100 keV, by default 100
+    TH1F * hrate = plothl.GetRate(1000); // NBins between 0 and 100 keV, by default 100
     hrate->SetTitle(Form("M_{W} = %d GeV",(int)MW[i]));
     hrate->SetLineColor(i+1);
-    hrNa = plothlNa.GetRate(1000); // NBins between 0 and 100 keV, by default 100
+    TH1F * hrNa = plothlNa.GetRate(1000); // NBins between 0 and 100 keV, by default 100
     hrNa->SetTitle(Form("Na M_{W} = %d GeV",(int)MW[i]));
     hrNa->SetLineColor(i+1);
-    hrI = plothlI.GetRate(1000); // NBins between 0 and 100 keV, by default 100
+    TH1F * hrI = plothlI.GetRate(1000); // NBins between 0 and 100 keV, by default 100
     hrI->SetTitle(Form("I M_{W} = %d GeV",(int)MW[i]));
     hrI->SetLineColor(i+1);
     hrI->SetLineStyle(9);
@@ -72,15 +72,15 @@ double Atot=ANa+AI;
 
     if (i==0) 
     {
-      //haux = (TH1F*)hrate->DrawClone("c");
-      haux = (TH1F*)hrI->DrawClone("c");
+      //haux = (TH1F*)hrate->DrawClone("chist");
+      haux = (TH1F*)hrI->DrawClone("chist");
     }
     else 
     {
-      //hrate->DrawClone("csame");
-      hrI->DrawClone("csame");
+      //hrate->DrawClone("chistsame");
+      hrI->DrawClone("chistsame");
     }
-    hrNa->DrawClone("csame");
+    hrNa->DrawClone("chistsame");
   }
   // change axis here
   haux->GetXaxis()->SetRangeUser(0,30);
