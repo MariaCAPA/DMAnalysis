@@ -55,8 +55,8 @@ void exSD_th(int minInt=10) // bines de 0.1 keV 1 keV -> 10 bines
 
    // SET BKG, EXPOSURE AND THRESHOLD
   double eth=0.25;
-  double bkg = 1;
-  exclusion->SetExposure(365); // in kgxday
+  double bkg = 0.5;
+  exclusion->SetExposure(3650); // in kgxday
   exclusion->SetLinearBkg(bkg); // in kgxday
   exclusion->SetWindow(0,10);
 
@@ -84,13 +84,12 @@ gPad->Update();
 
   TGraph * gSDp;
 
-  //exclusion->SetLinearBkg(bkg); // in c/keVee/kg/d
   DMExclusionPlotHandle  plothl (exclusion);
   std::vector <double> threshold;
   threshold.push_back(0.25);
   threshold.push_back(0.15);
   threshold.push_back(0.10);
-  threshold.push_back(0.05);
+//  threshold.push_back(0.05);
   for (int ii=0; ii<threshold.size(); ii++)
   {
     exclusion->SetThreshold(threshold[ii]); // in keV

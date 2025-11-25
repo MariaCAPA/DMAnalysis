@@ -67,7 +67,7 @@ class DMElement
     void SetJ  (double j)  {J=j;}; 
     void SetSp (double sp) {Sp=sp;}; 
     void SetSn (double sn) {Sn=sn;}; 
-    void SetREF(double ref){REF = ref;};
+    void SetREF(double ref){REF = ref;delete gREF;gREF=0;};
     void SetREF(TGraph * g){gREF = g;};
     void SetNAtoms(double na){NAtoms = na;};
     void SetTheta(double th){Theta = th;SetSpinFactor(Theta);FFSD->Initialize(A,Theta);};
