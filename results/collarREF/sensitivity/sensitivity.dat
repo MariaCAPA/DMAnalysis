@@ -1,0 +1,18 @@
+# file to initialize Rate class
+RATEFILE rate.dat
+# Exposure in kg . day 250 kg, 1 year
+EXPOSURE 91250
+#Confidence level
+DELTA2 5.6
+# file with background, number of counts/keV/kg/day
+LINBACKGROUND 1
+# Initial Energy
+EINI 0.2 
+# Final Energy
+EEND 6
+# Energy bin
+EBIN 0.2
+
+# WINDOW
+EWINI 1
+EWEND 2
