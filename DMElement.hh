@@ -10,11 +10,11 @@
 #include "DMVFormFactor.hh"
 #include <fstream>
 #include <math.h>
+#include <TGraph.h>
 using namespace std;
 
 #define MAXELEM 10
 
-class TGraph;
 
 /************************
  * CLASS ELEMENT

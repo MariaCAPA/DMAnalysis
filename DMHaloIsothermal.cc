@@ -72,4 +72,6 @@ double DMHaloIsothermal::T (double vmin, double * S0, double * Sm, double * phi 
 
   // phase
   *phi = Phi;
+
+  return 0;
 }

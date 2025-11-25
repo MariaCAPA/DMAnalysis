@@ -130,4 +130,6 @@ double DMHaloLGE::T (double vmin, double * S0, double * Sm, double * phi )
   * S0 = T0[index-1] + frac * (T0[index]-T0[index-1]); 
   * Sm = Tm[index-1] + frac * (Tm[index]-Tm[index-1]); 
   * phi = Phiv[index-1] + frac * (Phiv[index]-Phiv[index-1]); 
+
+  return 0;
 }

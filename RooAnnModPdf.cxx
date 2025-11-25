@@ -56,6 +56,8 @@ int RooAnnModPdf::initialize(const char * fileRate)
 
   fDMRate->SetMW(mW);
   fDMRate->SetSigSI(sSI);
+
+  return 0;
 }
 
  Double_t RooAnnModPdf::evaluate() const 

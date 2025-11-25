@@ -84,6 +84,8 @@ double DMFlux::T (double vmin, double * S0, double * Sm, double * phi )
 
   // phase
   *phi = Phi;
+
+  return 0;
 }
 
 void DMFlux::SetV0(double v0)

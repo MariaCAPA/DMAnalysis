@@ -58,4 +58,6 @@ int DMVPlotHandle::Dump(char * fileName, TTree * tree)
     }
     fq << std::endl;
   }
+  
+  return 0;
 }

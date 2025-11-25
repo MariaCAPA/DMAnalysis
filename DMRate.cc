@@ -254,6 +254,8 @@ int DMRate::Rate (double energy_ee, double * S0Tot, double * SMTot, double * Phi
   if (TMath::IsNaN(*S0Tot)) *S0Tot = 0;
   if (TMath::IsNaN(*SMTot)) *SMTot = 0;
   if (TMath::IsNaN(*PhiTot)) *PhiTot = 0;
+
+  return 0;
 }
 
 // Gives the Sprectrum from  e1 to e2 in bins of ebin keVee. 
@@ -406,6 +408,7 @@ int DMRate::SpectrumResolution (double e1, double e2, double ebin,
   delete [] array_SM;
   delete [] array_Phi;
   
+  return 0;
 } 
 
 // energy in keVee

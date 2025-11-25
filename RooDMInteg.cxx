@@ -53,6 +53,8 @@ ClassImp(RooDMInteg)
 
   eneIni = eIni;
   eneEnd = eEnd;
+
+  return 0;
 }
 
 
