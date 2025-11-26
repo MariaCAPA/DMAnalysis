@@ -268,7 +268,8 @@ double DMRate::GetSigma(double ene)
 {
   if (Resolution>0) return Resolution;
   if (ResolutionK>0)  return ResolutionK*sqrt(ene); 
-  return sqrt(ResolutionA * ene + ResolutionB);
+  if (ResolutionA>0) return sqrt(ResolutionA * ene + ResolutionB);
+  return 0;
 
 }
 
