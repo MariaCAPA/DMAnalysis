@@ -13,7 +13,7 @@
 #include <limits>
 using namespace std;
 
-#define verylarge 1e30
+#define verylarge 1e300
 
 // Conctructor
 DMExclusion::DMExclusion ()
@@ -344,13 +344,14 @@ std::cout << " mw  " << mW <<  " -> " << "exp counts " << maxExRate << " expecte
   else 
   {
     // look for optiman interval with at least minInt bins, from 0 to Wbins
-    double exp,theo,optExp, optTheo, merit=verylarge;
-    int bestI, bestE;
+    double exp,theo,optExp=verylarge, optTheo, merit=verylarge;
+    int bestI=0, bestE=minInt;
+    NWbins = (EWend-EWini)/Ebin; // Maria 261125
     for (int is=0; is<NWbins-minInt; is++) // start of the interval
     {
       for (int ie=is+minInt; ie<NWbins; ie++)
         {
-          GetRates(is,ie, exp, theo);
+          GetRates(is,ie, exp, theo); // is is the first in window
 
           DMGetMaxCountsCL(exp, cl, &nmax);
           if ( (nmax/theo) < merit)
@@ -366,7 +367,7 @@ std::cout << " mw  " << mW <<  " -> " << "exp counts " << maxExRate << " expecte
     double nmax;
     DMGetMaxCountsCL(optExp, cl, &nmax);
     crossSection = nmax / optTheo; // In picobarns
-std::cout << " mw  " << mW <<  " best interval " << EWini+bestI*Ebin << " : " << EWini+bestE*Ebin << " index: " << bestI << "-" << bestE << " -> " << "exp counts " << optExp << " afrer CL -> " << nmax << " expected " << optTheo << std::endl;
+std::cout << " minInt: " << minInt << " NWbins " << NWbins << " mw  " << mW <<  " best interval " << EWini+bestI*Ebin << " : " << EWini+bestE*Ebin << " index: " << bestI << "-" << bestE << " -> " << "exp counts " << optExp << " afrer CL -> " << nmax << " expected " << optTheo << std::endl;
   }
 
   if (crossSection == std::numeric_limits<double>::infinity() ) crossSection=verylarge;
