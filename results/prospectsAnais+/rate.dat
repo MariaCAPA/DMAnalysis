@@ -7,7 +7,10 @@ THETA        0
 # Wimp mass in GeV
 MW           60
 # resolution proportional constant. Sigma = k * sqrt (E)
-RESOLUTIONK  0.1
+# poisson-> sigma_E = sqrt(E/LY) -> k=sqrt(1./LY)
+# 30 phe/keV -> threshold 0.1 corresponde a 3 phe  -> sigma = 0.18sqrt(E)
+# 40 phe/keV -> threshold 0.1 corresponde a 4 phe  -> sigma = 0.16sqrt(E)
+RESOLUTIONK  0.2
 
 # RESOLUTIONK  1.0
 # Number of elements in the target. For every element, 

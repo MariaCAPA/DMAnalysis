@@ -11,7 +11,7 @@
   // Initalize rate class
   int error;
   DMRate * theRate = new DMRate();
-  error = theRate->Initialize("rateANAIS.dat");
+  error = theRate->Initialize((char*)"rateANAIS.dat");
   if (error<0) return;
 
   // Create plot handle and pass the rate class

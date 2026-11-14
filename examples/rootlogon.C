@@ -1,8 +1,11 @@
 {
    //gSystem.Load("/media/sf_D/Users/Maria/DMAnalysis/lib/DMAnalysis.so");
   //gSystem->AddDynamicPath("$DMANALYSIS/lib");
+
+
   gSystem->Load("libDMAnalysis.so");
-  gSystem->Load("libProofPlayer.so");
+// MARIA 110326 comento esto
+//  gSystem->Load("libProofPlayer.so");
 
 //  gROOT->ProcessLine(".L compRate.C");
 

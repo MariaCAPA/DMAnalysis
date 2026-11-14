@@ -347,6 +347,7 @@ std::cout << " mw  " << mW <<  " -> " << "exp counts " << maxExRate << " expecte
     double exp,theo,optExp=verylarge, optTheo, merit=verylarge;
     int bestI=0, bestE=minInt;
     NWbins = (EWend-EWini)/Ebin; // Maria 261125
+    bool found=0;
     for (int is=0; is<NWbins-minInt; is++) // start of the interval
     {
       for (int ie=is+minInt; ie<NWbins; ie++)
@@ -356,6 +357,7 @@ std::cout << " mw  " << mW <<  " -> " << "exp counts " << maxExRate << " expecte
           DMGetMaxCountsCL(exp, cl, &nmax);
           if ( (nmax/theo) < merit)
           {
+            found = 1;
             optExp=exp; optTheo=theo; 
             merit=nmax/theo;
             bestI=is; bestE=ie;
@@ -364,9 +366,13 @@ std::cout << " mw  " << mW <<  " -> " << "exp counts " << maxExRate << " expecte
      }
 
     // NOW CONSIDER THE CL
-    double nmax;
-    DMGetMaxCountsCL(optExp, cl, &nmax);
-    crossSection = nmax / optTheo; // In picobarns
+    if (!found) crossSection=verylarge;
+    else
+    {
+      double nmax;
+      DMGetMaxCountsCL(optExp, cl, &nmax);
+      crossSection = nmax / optTheo; // In picobarns
+    }
 std::cout << " minInt: " << minInt << " NWbins " << NWbins << " mw  " << mW <<  " best interval " << EWini+bestI*Ebin << " : " << EWini+bestE*Ebin << " index: " << bestI << "-" << bestE << " -> " << "exp counts " << optExp << " afrer CL -> " << nmax << " expected " << optTheo << std::endl;
   }
 

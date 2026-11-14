@@ -7,10 +7,11 @@
 // - Calculate the rate for 3 different wimp masses (10, 100, 1000 GeV)
 //   and superpose them in a plot
 {
-   gSystem->Load("libDMAnalysis");
+   // Maria 110326 comento esto, ya esta en el rootlogon.C
+   //gSystem->Load("libDMAnalysis");
   double cRefNa = 1;
   double cRefI = 1;
-  double si = 1e-5;
+  double si = 1e-9;// 1e-9 pbarn = 1e-45 cm2
 
 
 
@@ -23,7 +24,7 @@ double Atot=ANa+AI;
   DMRate * rate = new DMRate();
   DMRate * rNa = new DMRate();
   DMRate * rI = new DMRate();
-  error = rate->Initialize("$DMANALYSIS/templates/rate.dat");
+  error = rate->Initialize("rate.dat");
   error = rNa->Initialize("rateNa.dat");
   error = rI->Initialize("rateI.dat");
   if (error<0) return;
@@ -41,7 +42,8 @@ double Atot=ANa+AI;
   DMRatePlotHandle  plothlNa (rNa);
   DMRatePlotHandle  plothlI (rI);
 
-  double MW [3] = {10,50,100}; // GeV
+  //double MW [3] = {10,50,100}; // GeV
+  double MW [1] = {10}; // GeV
 
   ////////////////////////
   // Spin Independent
@@ -83,7 +85,7 @@ double Atot=ANa+AI;
     hrNa->DrawClone("chistsame");
   }
   // change axis here
-  haux->GetXaxis()->SetRangeUser(0,30);
+  haux->GetXaxis()->SetRangeUser(0,100);
   c->BuildLegend();
 
   //c->SaveAs("plotRateMW.jpg");

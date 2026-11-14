@@ -1,68 +1,60 @@
-ROOTINC= -I$(shell root-config --incdir)
+ROOTCFLAGS := $(shell root-config --cflags)
+ROOTLIBS   := $(shell root-config --glibs)
 
-CC=g++
-LD=g++
-CXXFLAGS= -g -std=c++17 -fPIC 
-#CXXFLAGS= -g -std=c++11 -fPIC 
-#CXXFLAGS= -g -fPIC 
-#-std=gnu++11
-# -std=c++11 
-SOFLAGS = -shared
-CCFLAGS = -g `root-config --glibs --cflags --libs` -fPIC -lCore
+CC = g++
+LD = g++
 
-INCLUDES=-I. ${ROOTINC}
+CXXFLAGS = -g -std=c++17 -fPIC $(ROOTCFLAGS)
+LDFLAGS  = -shared
+LDLIBS   = $(ROOTLIBS)
 
-#LIBDIR= -L 
-#LDLIBS= -lgsl -lgslcblas 
-#LDLIBS= -lgsl -lgslcblas -lRooFit -lRooFitCore 
+INCLUDES = -I. -I$(shell root-config --incdir)
 
-OBJDIR=obj
-OUTDIR=lib
+OBJDIR = obj
+OUTDIR = lib
 
-DICT=DMDict
-LIBNAME=libDMAnalysis
+DICT = DMDict
+LIBNAME = libDMAnalysis
 
-DICTRoo=DMDictRoo
-LIBNAMERoo=libDMAnalysisRoo
+DICTRoo = DMDictRoo
+LIBNAMERoo = libDMAnalysisRoo
 
+objects    := $(patsubst %.cc,$(OBJDIR)/%.o,$(wildcard *.cc))
+objectsRoo := $(patsubst %.cxx,$(OBJDIR)/%.o,$(wildcard *.cxx))
 
-all: lib libRoo
+all: dirs lib libRoo
 
-objects := $(patsubst %.cc,$(OBJDIR)/%.o,$(wildcard *.cc))
-objectsRoo := $(patsubst %.cc,$(OBJDIR)/%.o,$(wildcard *.cxx))
+dirs:
+	mkdir -p $(OBJDIR) $(OUTDIR)
 
-lib: $(objects) $(OBJDIR)/$(DICT).o 
-	@echo "Linking ... "
-	$(LD) $(SOFLAGS)  $(CCFLAGS) ${LIBDIR} ${LDLIBS}  $^  -o $(OUTDIR)/$(LIBNAME).so
+lib: $(objects) $(OBJDIR)/$(DICT).o
+	@echo "Linking $@..."
+	$(LD) $(LDFLAGS) -o $(OUTDIR)/$(LIBNAME).so $^ $(LDLIBS)
 
 libRoo: $(objectsRoo) $(OBJDIR)/$(DICTRoo).o
-	@echo "Linking ... "
-	$(LD) $(SOFLAGS)  $(CCFLAGS) ${LIBDIR} ${LDLIBS}  $^ -o $(OUTDIR)/$(LIBNAMERoo).so
+	@echo "Linking $@..."
+	$(LD) $(LDFLAGS) -o $(OUTDIR)/$(LIBNAMERoo).so $^ $(LDLIBS)
 
-$(OBJDIR)/$(DICT).o:$(DICT).cc
-$(OBJDIR)/$(DICTROO).o:$(DICTROO).cxx
-
-$(DICT).cc: DM*.hh 
+$(DICT).cc: DM*.hh LinkDef.hh | dirs
 	@echo "Generating dictionary $@..."
-	rootcint -f $@  -c $(ROOTINC) $^ LinkDef.hh
-	#mv DMDict_rdict.pcm lib/. 
+	rootcling -f $@ -c $(INCLUDES) $^
 
-$(DICTRoo).cc: RooAnnModPdf.h RooDMPdf.h RooDMInteg.h LinkDef.h
+$(DICTRoo).cxx: RooAnnModPdf.h RooDMPdf.h RooDMInteg.h LinkDef.h | dirs
 	@echo "Generating dictionary $@..."
-	rootcint -f $@  -c $(ROOTINC) $^
-	#mv DMDictRoo_rdict.pcm lib/. 
+	rootcling -f $@ -c $(INCLUDES) $^
 
-$(OBJDIR)/%.o : %.cc
-	$(CC) $(CXXFLAGS) $(INCLUDES) -c  $< -o $@
+$(OBJDIR)/%.o: %.cc | dirs
+	$(CC) $(CXXFLAGS) $(INCLUDES) -c $< -o $@
 
-$(OBJDIR)/%.o : %.C
-	$(CC) $(CXXFLAGS) $(INCLUDES) -c  $< -o $@
+$(OBJDIR)/%.o: %.C | dirs
+	$(CC) $(CXXFLAGS) $(INCLUDES) -c $< -o $@
 
-$(OBJDIR)/%.o : %.cxx
-	$(CC) $(CXXFLAGS) $(INCLUDES) -c  $< -o $@
-
-
+$(OBJDIR)/%.o: %.cxx | dirs
+	$(CC) $(CXXFLAGS) $(INCLUDES) -c $< -o $@
 
 clean:
-	rm -f ${DICT}.cc ${DICT}.h $(OUTDIR)/${LIBNAME}.so ${OBJDIR}/*.o
-	rm -f ${DICTRoo}.cc ${DICTRoo}.h $(OUTDIR)/${LIBNAMERoo}.so
+	rm -f $(DICT).cc $(DICT).h
+	rm -f $(DICTRoo).cxx $(DICTRoo).h
+	rm -f $(OUTDIR)/$(LIBNAME).so $(OUTDIR)/$(LIBNAMERoo).so
+	rm -f $(OUTDIR)/*.pcm $(OUTDIR)/*.rootmap
+	rm -f $(OBJDIR)/*.o

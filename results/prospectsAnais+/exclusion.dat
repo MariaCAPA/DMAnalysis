@@ -9,6 +9,6 @@ LINBACKGROUND 0.1
 # Initial Energy 
 EINI  0
 # Final Energy
-EEND 8
-# Energy bin
-EBIN 0.1
+EEND 6
+# Energy bin: 10 eV. 
+EBIN 0.01

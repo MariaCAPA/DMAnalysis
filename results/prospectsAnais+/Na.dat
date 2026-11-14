@@ -5,7 +5,7 @@ Sp    0.2477
 Sn    0.0198
 
 # quenching factor: from 0.33 to 0.25
-Q     0.20
+Q     0.22
 
 FFSI  STD
 FFSD  STD
