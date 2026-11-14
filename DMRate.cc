@@ -18,6 +18,7 @@
 // Conctructor
 DMRate::DMRate() : NElements(0), Elements(0), NHaloModels(0), HaloModels(0)
 {
+  Delta = 0;
   Resolution = 0;
   ResolutionK = 0;
   ResolutionA = 0;
@@ -25,8 +26,8 @@ DMRate::DMRate() : NElements(0), Elements(0), NHaloModels(0), HaloModels(0)
 }
 
 // Copy constructor
-DMRate::DMRate(const DMRate &other) : NElements(other.NElements), Mol(other.Mol), NHaloModels(other.NHaloModels), SigSI(other.SigSI), SigSD(other.SigSD),
-                                      Theta(other.Theta), MW(other.MW), MWnucleon2(other.MWnucleon2), Resolution(other.Resolution), ResolutionK(other.ResolutionK), ResolutionA(other.ResolutionA), ResolutionB(other.ResolutionB)
+DMRate::DMRate(const DMRate &other) : NElements(other.NElements), Mol(other.Mol), NHaloModels(other.NHaloModels), SigSI(other.SigSI), SigSD(other.SigSD), 
+                                      Theta(other.Theta), MW(other.MW), MWnucleon2(other.MWnucleon2), Delta(other.Delta), Resolution(other.Resolution), ResolutionK(other.ResolutionK), ResolutionA(other.ResolutionA), ResolutionB(other.ResolutionB)
 {
   int i = 0;
   // Halo models
@@ -227,6 +228,8 @@ int DMRate::Rate(double energy_ee, double *S0Tot, double *SMTot, double *PhiTot)
   double S0, SM, Phi;
   double ref;
 
+   // MARIA check
+  if (Delta !=0 && energy_ee<=0 ) return 0;
   // Loop in elements
   for (el = 0; el < NElements; el++)
   {
@@ -252,7 +255,7 @@ int DMRate::Rate(double energy_ee, double *S0Tot, double *SMTot, double *PhiTot)
     // halo contribution
     for (hal = 0; hal < NHaloModels; hal++)
     {
-      HaloModels[hal]->T(Elements[el]->Vmin(edep, MW), &S0, &SM, &Phi);
+      HaloModels[hal]->T(Elements[el]->Vmin(edep, MW, Delta), &S0, &SM, &Phi);
 
       // Convet from years to radians
       // Phi *= DAYTORAD;

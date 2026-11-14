@@ -89,12 +89,17 @@ class DMElement
       return  4*mW*MN/(mW+MN)/(mW+MN);
     }
    
-    // Returns minimum velocity that produces a recoil of energy energy_ee
-    // input : Energy in keV, Mass in GeV
+    // Returns minimum velocity that produces a recoil of energy energy
+    // input : Energy in keV_NR, Mass in GeV
     // output: velocity in km/s
-    inline double Vmin (double energy, double mW)
+    // delta in keV
+    inline double Vmin (double energy, double mW, double delta=0)
     {
+      if (delta == 0.)
        return ( 300.*sqrt(2*energy/mW/RFactor(mW)) );
+
+      double mu = mW * MN / (mW + MN);
+      return 300.* fabs(MN*energy/mu + delta) / sqrt(2.*MN*energy);
     }
 
     // Set spin factor for given theta (in radians)

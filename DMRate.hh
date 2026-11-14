@@ -37,6 +37,7 @@ class DMRate
   double MW;    // Wimp mass in GeV
   double MWnucleon2; // Reduced mass wimp-nucleon squared. Is set every time 
                     // MW is set
+  double Delta; // mchi' - mchi, in keV
 
   // Detector resolution
   // if (Resolution>0)  sigma = Resolution (cte in all the range)
@@ -63,6 +64,7 @@ class DMRate
   inline double GetSigSD () {return SigSD;};
   inline double GetTheta () {return Theta;};
   inline double GetMW () {return MW;};
+  inline double GetDelta () {return Delta;};
   inline double GetMWnucleon2 () {return MWnucleon2;};
   inline double GetResolution () {return Resolution;}; 
   inline double GetResolutionK () {return ResolutionK;}; 
@@ -84,6 +86,7 @@ class DMRate
   inline void SetResolutionK (double aux) {ResolutionK=aux;}; 
   inline void SetResolutionA (double aux) {ResolutionA=aux;}; 
   inline void SetResolutionB (double aux) {ResolutionB=aux;}; 
+  inline void SetDelta (double aux) {Delta=aux;}; 
 
   // Read data from file
   int Initialize(char * fileName); 
